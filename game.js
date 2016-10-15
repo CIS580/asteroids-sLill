@@ -1,27 +1,55 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict;"
-
-/* Classes */
-const Game = require('./game.js');
-const Player = require('./player.js');
 
 /* Global variables */
 var canvas = document.getElementById('screen');
 var game = new Game(canvas, update, render);
-var player = new Player({x: canvas.width/2, y: canvas.height/2}, canvas);
+var player = new Player({ x: canvas.width / 2, y: canvas.height / 2 }, canvas);
+var levelDiv = document.getElementById('levelDiv');
+var scoreDiv = document.getElementById('scoreDiv');
+var hasInitialized = false;
+var score;
+var level;
+var lives;
 
-/**
- * @function masterLoop
- * Advances the game in sync with the refresh rate of the screen
- * @param {DOMHighResTimeStamp} timestamp the current time
- */
-var masterLoop = function(timestamp) {
-  game.loop(timestamp);
-  window.requestAnimationFrame(masterLoop);
+var asteroidArr;
+
+// Visual
+
+
+// Audio
+
+function Asteroid ()
+{
+
 }
-masterLoop(performance.now());
 
+Asteroid.prototype.update = function ()
+{
 
+}
+Asteroid.prototype.render = function ()
+{
+
+}
+
+function Initialize()
+{
+    hasInitialized = true;
+    lives = 3;
+    score = 0;
+    level = 1;
+    asteroidArr = [];
+}
+
+function CheckCollision(pointList, ox, oy, x, y)
+{
+
+}
+
+function rotate(point, theta)
+{
+
+}
 /**
  * @function update
  * Updates the game state, moving
@@ -32,7 +60,12 @@ masterLoop(performance.now());
  */
 function update(elapsedTime) {
   player.update(elapsedTime);
-  // TODO: Update the game objects
+    // TODO: Update the game objects
+
+  if(hasInitialized == false)
+  {
+      Initialize();
+  }
 }
 
 /**
@@ -46,15 +79,21 @@ function render(elapsedTime, ctx) {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   player.render(elapsedTime, ctx);
+  levelDiv.innerHTML = level;
+  scoreDiv.innerHTML = score;
+    
+    // Draw remaining lives
+  var livesXindex = 535;
+  ctx.beginPath();
+  for(var i = 0; i < lives; i++)
+  {
+      ctx.fillStyle = "green";
+      ctx.arc(livesXindex, 20, 6, 0, Math.PI * 2, true);
+      ctx.fill();
+      livesXindex += 20;
+  }
+  ctx.closePath();
 }
-
-},{"./game.js":2,"./player.js":3}],2:[function(require,module,exports){
-"use strict";
-
-/**
- * @module exports the Game class
- */
-module.exports = exports = Game;
 
 /**
  * @constructor Game
@@ -106,15 +145,7 @@ Game.prototype.loop = function(newTime) {
   this.frontCtx.drawImage(this.backBuffer, 0, 0);
 }
 
-},{}],3:[function(require,module,exports){
-"use strict";
-
 const MS_PER_FRAME = 1000/8;
-
-/**
- * @module exports the Player class
- */
-module.exports = exports = Player;
 
 /**
  * @constructor Player
@@ -174,8 +205,6 @@ function Player(position, canvas) {
     }
   }
 }
-
-
 
 /**
  * @function updates the player object
@@ -241,4 +270,13 @@ Player.prototype.render = function(time, ctx) {
   ctx.restore();
 }
 
-},{}]},{},[1]);
+/**
+ * @function masterLoop
+ * Advances the game in sync with the refresh rate of the screen
+ * @param {DOMHighResTimeStamp} timestamp the current time
+ */
+var masterLoop = function (timestamp) {
+    game.loop(timestamp);
+    window.requestAnimationFrame(masterLoop);
+}
+masterLoop(performance.now());

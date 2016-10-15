@@ -2,3 +2,44 @@ canvas#screen {
   border: 2px solid #333;
   box-shadow: 4px 4px 4px #777;
 }
+
+#level {
+    font-size: 20px;
+	color: red;
+    position: absolute;
+    top: 90px;
+    left: 20px;
+    z-index: 1;
+}
+#levelDiv {
+    font-size: 20px;
+	color: cyan;
+    position: absolute;
+    top: 90px;
+    left: 80px;
+    z-index: 1;
+}
+#score {
+    font-size: 20px;
+	color: red;
+    position: absolute;
+    top: 90px;
+    left: 620px;
+    z-index: 1;
+}
+#scoreDiv {
+    font-size: 20px;
+	color: cyan;
+    position: absolute;
+    top: 90px;
+    left: 680px;
+    z-index: 1;
+}
+#lives {
+    font-size: 20px;
+	color: red;
+    position: absolute;
+    top: 90px;
+    left: 480px;
+    z-index: 1;
+}
