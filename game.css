@@ -35,6 +35,14 @@ canvas#screen {
     left: 680px;
     z-index: 1;
 }
+#scoreFeedDiv {
+    font-size: 15px;
+	color: cyan;
+    position: absolute;
+    top: 110px;
+    left: 675px;
+    z-index: 1;
+}
 #lives {
     font-size: 20px;
 	color: red;
@@ -42,4 +50,29 @@ canvas#screen {
     top: 90px;
     left: 480px;
     z-index: 1;
+}
+#fpsDiv {
+    font-size: 15px;
+	color: green;
+    position: absolute;
+    top: 60px;
+    left: 740px;
+    z-index: 1;
+}
+#fps{
+    font-size: 15px;
+	color: black;
+    position: absolute;
+    top: 60px;
+    left: 710px;
+    z-index: 1;
+}
+#messageDiv {
+	font-size: 45px;
+	color: red;
+	font-weight: bold;
+	position: absolute;
+	top: 235px;
+	left: 285px;
+	z-index: 1;
 }
